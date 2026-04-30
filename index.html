@@ -343,7 +343,8 @@ IMPORTANTE:
   apiHistory.push({role:'user',content:userMsg});
   if(apiHistory.length > 16) apiHistory = apiHistory.slice(-16);
 
-  const res = await fetch('https://api.anthropic.com/v1/messages',{
+  const proxyUrl = 'https://corsproxy.io/?url=' + encodeURIComponent('https://api.anthropic.com/v1/messages');
+  const res = await fetch(proxyUrl,{
     method:'POST',
     headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},
     body:JSON.stringify({
